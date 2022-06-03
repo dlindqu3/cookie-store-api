@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     "corsheaders",
     # local
     "accounts",
-    "things",
+    "cookie_stands",
 ]
 
 MIDDLEWARE = [
@@ -107,6 +107,10 @@ DATABASES = {
         "PASSWORD": env.str("DATABASE_PASSWORD"),
         "HOST": env.str("DATABASE_HOST"),
         "PORT": env.int("DATABASE_PORT"),
+        ##options: this might fix an error if db can't let you access from local and heroku at same time
+        # "OPTIONS": {
+        #     "init__command":"SET GLOBAL max_connections=1000"
+        # }
     }
 }
 
@@ -168,3 +172,7 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_WHITELIST = tuple(env.list("ALLOWED_ORIGINS"))
 CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
+
+# CSRF_TRUSTED_ORIGINS = [
+#     '<heroku url>.herokuapp.com'
+# ]
